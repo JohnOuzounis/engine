@@ -18,10 +18,10 @@ function execute(name, source, variables, listener, onError, onSuccess) {
     if (!listener)
         listener = new Emitter.EventEmitter();
 
-    listener.on('activity.enter', (api) => {
+    listener.on('activity.enter', (api, engineApi) => {
         const attr = getAttributesById(api.id, source);
         if (attr['tags:actionTag']) {
-            tagger.invokeAction(attr['tags:actionTag'], api);
+            tagger.invokeAction(attr['tags:actionTag'], api, engineApi);
         }
     });
 

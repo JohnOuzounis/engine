@@ -12,8 +12,15 @@ app.post('/api/execute', async (req, res) => {
         const { name, source, variables } = req.body;
 
         engine.tagger.addAction('hello', (api) => { console.log('hellooo') });
-        engine.tagger.addAction('end1', (api) => { console.log('reached end1') });
-        engine.tagger.addAction('end2', (api) => { console.log('reached end2') });
+        engine.tagger.addAction('decision', (api, engine) => {
+            engine.definitions['0'].environment.variables["approval"] = "boba";
+        });
+        engine.tagger.addAction('end1', (api, engine) => {
+            console.log('reached end1');
+        });
+        engine.tagger.addAction('end2', (api, engine) => {
+            console.log('reached end2');
+        });
 
         engine.execute(name, source, variables, null,
             (err) => {

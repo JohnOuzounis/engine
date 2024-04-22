@@ -12,10 +12,10 @@ class BPMNTagManager {
         this.eventTags[tag] = description;
     }
 
-    invokeAction(tag, eventData) {
+    invokeAction(tag, eventData, engine) {
         const functor = this.actionTags[tag];
         if (functor && typeof functor === 'function') {
-            functor(eventData);
+            functor(eventData, engine);
         } else {
             console.error(`Action tag "${tag}" does not have a corresponding functor.`);
         }
