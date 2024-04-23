@@ -23,6 +23,9 @@ function execute(name, source, variables, listener, onError, onSuccess) {
         if (attr['tags:actionTag']) {
             tagger.invokeAction(attr['tags:actionTag'], api, engineApi);
         }
+        if (attr['tags:eventTag']) {
+            tagger.postEvent(attr['tags:eventTag'], api, engine);
+        }
     });
 
     engine.execute({

@@ -21,12 +21,12 @@ class BPMNTagManager {
         }
     }
 
-    postEvent(tag, eventData) {
+    postEvent(tag, eventData, engine) {
         const description = this.eventTags[tag];
         if (description) {
-            console.log(`Posted event "${tag}": ${description}`);
-        } else {
-            console.warn(`No description found for event tag "${tag}".`);
+            if (!engine.environment.output['events'])
+                engine.environment.output['events'] = [];
+            engine.environment.output['events'].push({ id: eventData.id, tag: tag, description: description });
         }
     }
 }
